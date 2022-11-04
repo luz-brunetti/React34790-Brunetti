@@ -1,15 +1,16 @@
 import React from "react";
 import NavBar from "./components/NavBar.js";
-import ItemListContainer from "./components/ItemListContainer.js";
+import Main from "./Main";
 import Footer from "./Footer"
+import { BrowserRouter } from "react-router-dom";
 
 function App(){
     return (
-        <>
+        <BrowserRouter>
             <NavBar/>
-            <ItemListContainer nombre="María Luz" apellido="Brunetti"/>
+            <Main/>
             <Footer/>
-        </>
+        </BrowserRouter>
 
     );
 }

@@ -1,31 +1,40 @@
 import React from "react";
 import ItemList from "./ItemList";
 import {useEffect,useState} from 'react'
-import { customFetch } from "./CustomFetch";
+import { customFetch, getProductsByCategory } from "./CustomFetch";
+import {useParams} from 'react-router-dom'
 import { products } from "./Products";
+// import {getPorductsByCategory} from './CustomFetch';
 
 
 const ItemListContainer = () => {  
       
    const [listProducts,setListProducts]  = useState([])
-   
-   useEffect(() => {
-       customFetch(products)
-           .then(res => setListProducts(res))
-   }, []) 
 
+   const {category} = useParams()
+
+
+    useEffect(() => {
+        setListProducts([])
+
+        if (category) {
+            getProductsByCategory(category)
+            .then (res => {setListProducts(res)})
+
+        }else {
+            customFetch()
+                .then(resultado => {setListProducts(resultado)})
+
+        }
+    },[category])
 
        return(
-       <div> 
-           <h1 className="title">PRODUCTOS</h1>  
-       <div>
-       </div>
-               {/* <ItemCount stock={5} initial={1} onAdd={onAdd} /> */}
-               <ItemList listProducts={listProducts}/> 
+        <div className='contenedor'>
+            <h1 className="title">Productos</h1>
+            {listProducts.length == 0 ? <h3 className="loading">Cargando...</h3> : <ItemList listProducts={listProducts} />}
         </div>
        )
    }
    
    export default ItemListContainer  
 
-   

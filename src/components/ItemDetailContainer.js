@@ -7,27 +7,24 @@ import { getDetailsById } from './CustomFetch';
 
 const ItemDetailContainer = () => {
     
-    const [prod, setItem] = useState({})
+    const [product,setListProducts]  = useState([])
 
     const {id} = useParams()
 
     useEffect(()=>{
         
-        setItem({})
+        setListProducts({})
 
         getDetailsById(id)
             .then(res=> {
-                setItem(res)
-        })
-        .catch((err)=>{
-            console.log(err)
+                setListProducts(res)
         })
 
     },[id])
 
     return (
         <div className='contenedor-detail'>
-            {prod.length == 0 ? <p>Cargando...</p> : <ItemDetail key={prod.id} item={prod} /> }
+        {product?.length === 0 ? <h1 className='loading'>Cargando...</h1> : <ItemDetail {...product}/>}
         </div>
     );
 }

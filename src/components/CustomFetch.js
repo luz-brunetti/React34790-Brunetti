@@ -1,6 +1,6 @@
 import { products } from "./Products"
 
-export const customFetch = (products) => {
+export const customFetch = () => {
     return new Promise((res) => {
         setTimeout(() =>{
             res(products)
@@ -8,21 +8,21 @@ export const customFetch = (products) => {
     })
 }
 
-export const getProductsByCategory= (id) => {
+export const getProductsByCategory= (cat) => {
 
     let getProductos = new Promise ((response) => {
         setTimeout(() =>{
-            response(products.filter(item=>item.category === id))
+            response(products.filter(product => product.category === cat))
         }, 2000)
     })
     return getProductos
 }
 
-export const getDetailsById = (productid)=> {
+export const getDetailsById = (id)=> {
 
     let showDetail = new Promise ((response) => {
         setTimeout(() =>{
-            response(products.find(item=>item.id === productid))
+            response(products.find(product => product.id === id))
         },2000)
     })
     return showDetail

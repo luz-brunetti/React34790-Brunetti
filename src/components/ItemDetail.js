@@ -1,30 +1,18 @@
 
 import React from "react";
-import { products } from "./Products";
 // import ItemCount from "./ItemCount";
 
-const ItemDetail = (product) => {
-
-    // const product = products()
-
-    const handleOnAdd = (cantidad) => {
-        console.log("Se agregaron " + cantidad + " productos")
-        console.log(product)
-    }
-
+const ItemDetail = ({nombre, precio, foto}) => {
     return (
-        <div>
-            <h2>{product.nombre} - ${product.precio}</h2>
-            <div className="detail-flex">
-                <img src={product.foto} alt={product.nombre} />
-                <div>
-                    {/* <p>{product.description}</p> */}
-                    {/* <p>{product.description}</p> */}
-                    {/* <ItemCount handleOnAdd={handleOnAdd}/> */}
-                </div>
+        <>
+            <img src={foto} alt={nombre} className='img-detail' />
+            <div className='contenedor-precio-titulo-detail'>
+            <h2 className='detail-title'>{nombre} - ${precio}</h2>
+            {/* <p>{detail}</p> */}
+            {/* <ItemCount/> */}
             </div>
-        </div>
-    )
+        </>
+    );
 }
 export default ItemDetail
 

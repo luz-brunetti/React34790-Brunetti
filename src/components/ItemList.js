@@ -4,14 +4,18 @@ import Item from "./Item";
 const ItemList = ({listProducts}) => { 
     
     return(
-        <>
-        <section className="products"> 
-        {listProducts.map((prod,i) => <Item key={prod.id}  product = {prod}/>)}
-        </section>
-        </>
-    
+        <section className="misProductos">
+        {
+            listProducts?.map(product => {
+                return ( 
+                    <Item key={product.id} {...product}/>
+                )
+            })
+        }
+    </section>
     ) 
     
 }
 
 export default ItemList
+

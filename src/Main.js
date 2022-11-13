@@ -1,8 +1,8 @@
 import React from "react";
-import Home from './Home';
+// import Home from './Home';
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
-import { Routes , Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 // import Carrito from "./Carrito";
 
 const Main = () => {
@@ -11,7 +11,7 @@ const Main = () => {
         <main>
             <Routes>
 
-                <Route path='/' element={<Home/>}/>
+                <Route path='/' element={<ItemListContainer/>}/>
                 <Route path="/productos" element={<ItemListContainer/>}/>
                 <Route path="/productos/:category"  element={<ItemListContainer/>}/>
                 <Route path="/item/:id" element={<ItemDetailContainer/>}/>

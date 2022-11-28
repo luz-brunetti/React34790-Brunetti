@@ -1,15 +1,21 @@
 
 import React from "react";
-// import ItemCount from "./ItemCount";
+import ItemCount from "./ItemCount";
 
-const ItemDetail = ({nombre, precio, foto}) => {
+const ItemDetail = ({nombre, precio, foto, description}) => {
+
+    
     return (
         <>
-            <img src={foto} alt={nombre} className='img-detail' />
-            <div className='contenedor-precio-titulo-detail'>
-            <h2 className='detail-title'>{nombre} - ${precio}</h2>
-            {/* <p>{detail}</p> */}
-            {/* <ItemCount/> */}
+        <div className="card__container">
+            <div className='card__description'>
+            <img src={foto} alt={nombre} className="description__img" />
+            <div className="detail__container">
+            <h2 className='detail-title'>{nombre} {precio}</h2>
+            <p>{description}</p>
+            <ItemCount/>
+            </div>
+            </div>
             </div>
         </>
     );

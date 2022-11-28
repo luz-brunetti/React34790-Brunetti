@@ -1,10 +1,9 @@
 import React from "react";
-import ItemList from "./ItemList";
+import { collection, getDocs, query, where  } from "firebase/firestore";
 import {useEffect,useState} from 'react'
-import { customFetch, getProductsByCategory } from "./CustomFetch";
+import { db } from "../Firebase";
 import {useParams} from 'react-router-dom'
-import { products } from "./Products";
-// import {getPorductsByCategory} from './CustomFetch';
+import ItemList from "./ItemList";
 
 
 const ItemListContainer = () => {  
@@ -17,15 +16,32 @@ const ItemListContainer = () => {
     useEffect(() => {
         setListProducts([])
 
+        const productsCollection = collection (db, "productos")
+
         if (category) {
-            getProductsByCategory(category)
-            .then (res => {setListProducts(res)})
+            const filtro = query(productsCollection, where("category", "==", category))
+            const consulta = getDocs(filtro)
+            consulta
+                .then((resultado) => {
+                    const productos = resultado.docs.map(doc => ({ ...doc.data(), id: doc.id }))
+                    setListProducts(productos)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
 
-        }else {
-            customFetch()
-                .then(resultado => {setListProducts(resultado)})
-
-        }
+            } else {
+                const consulta = getDocs(productsCollection)
+                consulta
+                    .then((resultado) => {
+                        const productos = resultado.docs.map(doc => ({ ...doc.data(), id: doc.id }))
+                        setListProducts(productos)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+    
+            }
     },[category])
 
        return(
